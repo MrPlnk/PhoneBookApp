@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Телефоння книга</string>
+
+    <string name="subscriber_entry_title">Новый абонент</string>
+    <string name="subscriber_detail_title">Об абоненте</string>
+    <string name="subscriber_edit_title">Редактировать абонента</string>
+
+    <string name="back">Назад</string>
+
+    <string name="subscribers_list_is_empty">Список абонентов пуст</string>
+</resources>
