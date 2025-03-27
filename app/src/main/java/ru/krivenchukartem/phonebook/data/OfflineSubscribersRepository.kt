@@ -11,5 +11,5 @@ class OfflineSubscribersRepository(private val subscriberDao: SubscriberDao): Su
 
     override suspend fun insertSubscriber(subscriber: Subscriber) = subscriberDao.insert(subscriber)
 
-    override suspend fun updateSubscriber(subscriber: Subscriber) = subscriberDao.delete(subscriber)
+    override suspend fun updateSubscriber(subscriber: Subscriber) = subscriberDao.update(subscriber)
 }

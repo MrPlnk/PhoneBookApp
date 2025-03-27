@@ -72,6 +72,7 @@ fun SubscriberEntryBody(
 ){
     Column(
         modifier = modifier.padding(dimensionResource(R.dimen.medium_padding)),
+
     ){
         SubscriberEntryField(
             subscriberDetail = subscriberUiState.subscriberDetail,

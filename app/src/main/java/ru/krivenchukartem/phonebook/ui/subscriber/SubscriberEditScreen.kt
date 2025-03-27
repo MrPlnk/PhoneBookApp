@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.launch
 import ru.krivenchukartem.phonebook.PhoneBookTopAppBar
@@ -50,4 +51,12 @@ fun SubscriberEditScreen(
             modifier = Modifier.padding(innerPadding)
         )
     }
+}
+
+@Composable
+@Preview
+fun SubscriberEditScreenPreview(){
+    SubscriberEditScreen(
+        navigateBack = {}
+    )
 }

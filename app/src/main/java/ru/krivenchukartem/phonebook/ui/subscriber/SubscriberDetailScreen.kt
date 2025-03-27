@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
@@ -12,6 +13,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
@@ -91,18 +93,21 @@ fun SubscriberDetailBody(
 ){
     Column(
         modifier = modifier
-            .padding(dimensionResource(R.dimen.medium_padding))
+            .padding(dimensionResource(R.dimen.medium_padding)),
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.medium_padding))
     ){
         SubscriberDetailCard(
             subscriberDetail = uiState.subscriberDetail
         )
         Button(
-            onClick = onCallButtonClicked
+            onClick = onCallButtonClicked,
+            modifier = Modifier.fillMaxWidth()
         ) {
             Text(text = stringResource(R.string.subscriber_call))
         }
         OutlinedButton(
-            onClick = onDeleteButtonClicked
+            onClick = onDeleteButtonClicked,
+            modifier = Modifier.fillMaxWidth()
         ) {
             Text(text = stringResource(R.string.subscriber_delete))
         }
@@ -121,16 +126,9 @@ fun SubscriberDetailCard(
             modifier = modifier.padding(dimensionResource(R.dimen.medium_padding)),
             verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.small_padding))
         ){
-            Row(){
-                Text(text = stringResource(R.string.subscriber_name))
-                Spacer(Modifier.weight(1f))
-                Text(text = subscriberDetail.name)
-            }
-            Row(){
-                Text(text = stringResource(R.string.subscriber_number))
-                Spacer(Modifier.weight(1f))
-                Text(text = subscriberDetail.number)
-            }
+            Text(text = subscriberDetail.name)
+            HorizontalDivider()
+            Text(text = subscriberDetail.number)
         }
     }
 }
