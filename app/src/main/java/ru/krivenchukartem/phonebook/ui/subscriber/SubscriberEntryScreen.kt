@@ -54,7 +54,7 @@ fun SubscriberEntryScreen(
             onSubscriberValueChanged = entryViewModel::updateState,
             onSaveButtonClick = {
                 coroutineScope.launch {
-                    entryViewModel::saveSubscriber
+                    entryViewModel.saveSubscriber()
                     navigationBack()
                 }
             },
@@ -71,12 +71,12 @@ fun SubscriberEntryBody(
     modifier: Modifier = Modifier
 ){
     Column(
-        modifier = modifier,
+        modifier = modifier.padding(dimensionResource(R.dimen.medium_padding)),
     ){
         SubscriberEntryField(
             subscriberDetail = subscriberUiState.subscriberDetail,
             onValueChange = onSubscriberValueChanged,
-            modifier = Modifier.padding(dimensionResource(R.dimen.medium_padding))
+            modifier = Modifier
         )
         Button(
             onClick = onSaveButtonClick,

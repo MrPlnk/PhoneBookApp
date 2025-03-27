@@ -1,5 +1,6 @@
 package ru.krivenchukartem.phonebook.ui.subscriber
 
+import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.StateFlow
@@ -34,6 +35,7 @@ class SubscriberEntryViewModel(private val subscribersRepository: SubscribersRep
     }
 
     suspend fun saveSubscriber(){
+        Log.d("Save", "${validateNumber()}${validateName()}")
         if (validateNumber() && validateName()) {
             subscribersRepository.insertSubscriber(subscriberUiState.subscriberDetail.toSubscriber())
         }
@@ -56,4 +58,19 @@ fun SubscriberDetail.toSubscriber(): Subscriber = Subscriber(
     id = id,
     fullName = name,
     phoneNumber = number
+)
+
+fun Subscriber.toSubscriberDetail(): SubscriberDetail = SubscriberDetail(
+    id = id,
+    name = fullName,
+    number = phoneNumber
+)
+
+fun Subscriber.toSubscriberUiState(
+    isNameValid: Boolean,
+    isNumberValid: Boolean,
+): SubscriberUiState = SubscriberUiState(
+    isNumberValid = isNumberValid,
+    isNameValid = isNameValid,
+    subscriberDetail = toSubscriberDetail()
 )

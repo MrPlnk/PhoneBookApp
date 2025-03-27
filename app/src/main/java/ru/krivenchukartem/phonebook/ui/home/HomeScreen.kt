@@ -44,7 +44,7 @@ object HomeDestination: NavigationDestination{
 @Composable
 fun HomeScreen(
     navigateToSubscriberEntry: () -> Unit,
-    navigateToSubscriberEdit: (Int) -> Unit,
+    navigateToSubscriberDetail: (Int) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ){
@@ -74,7 +74,7 @@ fun HomeScreen(
     ){ innerPadding ->
         HomeBody(
             subscribersList = homeUiState.subscribersList,
-            onItemClick = navigateToSubscriberEdit,
+            onItemClick = navigateToSubscriberDetail,
             modifier = Modifier.padding(innerPadding)
         )
     }

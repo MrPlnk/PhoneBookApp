@@ -64,6 +64,10 @@ dependencies {
 //    implementation(libs.androidx.room.runtime)
 //    implementation(libs.androidx.room.compiler)
 
+    // Testing
+    androidTestImplementation(libs.androidx.espresso.core.v351)
+    androidTestImplementation(libs.androidx.junit.v115)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
