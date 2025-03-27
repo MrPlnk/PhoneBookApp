@@ -8,4 +8,12 @@
     <string name="back">Назад</string>
 
     <string name="subscribers_list_is_empty">Список абонентов пуст</string>
+    <string name="subscriber_name">Имя абонента</string>
+    <string name="subscriber_number">Номер абонента</string>
+    <string name="subscriber_name_required">Имя абонента*</string>
+    <string name="subscriber_number_required">Номер абонента*</string>
+    <string name="required_field">Обязательные поля*</string>
+    <string name="subscriber_save">Сохранить абонента</string>
+    <string name="subscriber_call">Позвонить абоненту</string>
+    <string name="subscriber_delete">Удалить абонента</string>
 </resources>

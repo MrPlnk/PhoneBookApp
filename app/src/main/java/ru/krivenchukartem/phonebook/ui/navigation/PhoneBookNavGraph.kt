@@ -1,10 +1,17 @@
 package ru.krivenchukartem.phonebook.ui.navigation
 
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
+import ru.krivenchukartem.phonebook.R
 import ru.krivenchukartem.phonebook.ui.home.HomeDestination
 import ru.krivenchukartem.phonebook.ui.home.HomeScreen
 import ru.krivenchukartem.phonebook.ui.subscriber.SubscriberDetailDestination
@@ -26,22 +33,39 @@ fun PhoneBookNavHost(
     ){
         composable(route = HomeDestination.route){
             HomeScreen(
-
+                navigateToSubscriberDetail = {
+                    navController.navigate("${SubscriberDetailDestination.route}/${it}")
+                },
+                navigateToSubscriberEntry = {navController.navigate(SubscriberEntryNavigation.route)},
             )
         }
-        composable(route = SubscriberEditDestination.route){
+        composable(
+            route = SubscriberEditDestination.routeWithArgs,
+            arguments = listOf(navArgument(SubscriberEditDestination.subscriberIdArg){
+                type = NavType.IntType
+            })
+        ){
             SubscriberEditScreen(
-
+                navigateBack = {navController.navigateUp()}
             )
         }
-        composable(route = SubscriberDetailDestination.route){
+        composable(
+            route = SubscriberDetailDestination.routeWithArgs,
+            arguments = listOf(navArgument(SubscriberDetailDestination.subscriberIdArg){
+                type = NavType.IntType
+            })
+        ){
             SubscriberDetailScreen(
-
+                navigateToSubscriberEdit = {
+                    navController.navigate("${SubscriberEditDestination.route}/${it}")
+                },
+                navigateBack = {navController.navigateUp()}
             )
         }
         composable(route = SubscriberEntryNavigation.route){
             SubscriberEntryScreen(
-
+                navigationBack = {navController.popBackStack()},
+                navigationUp = {navController.navigateUp()}
             )
         }
     }
