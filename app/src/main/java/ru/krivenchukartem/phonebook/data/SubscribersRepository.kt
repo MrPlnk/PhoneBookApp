@@ -12,4 +12,6 @@ interface SubscribersRepository {
     suspend fun updateSubscriber(subscriber: Subscriber)
 
     suspend fun deleteSubscriber(subscriber: Subscriber)
+
+    fun getSubscribersByNameStream(query: String): Flow<List<Subscriber>>
 }

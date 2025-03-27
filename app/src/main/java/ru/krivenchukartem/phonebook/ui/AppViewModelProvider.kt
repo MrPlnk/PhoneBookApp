@@ -13,6 +13,7 @@ import ru.krivenchukartem.phonebook.ui.subscriber.SubscriberEditViewModel
 import ru.krivenchukartem.phonebook.ui.subscriber.SubscriberEntryField
 import ru.krivenchukartem.phonebook.ui.subscriber.SubscriberEntryScreen
 import ru.krivenchukartem.phonebook.ui.subscriber.SubscriberEntryViewModel
+import ru.krivenchukartem.phonebook.ui.subscriber.SubscriberSearchViewModel
 
 object AppViewModelProvider {
     val Factory = viewModelFactory {
@@ -39,6 +40,12 @@ object AppViewModelProvider {
         initializer {
             SubscriberEditViewModel(
                 this.createSavedStateHandle(),
+                phoneBookApplication().container.subscriberRepository
+            )
+        }
+
+        initializer {
+            SubscriberSearchViewModel(
                 phoneBookApplication().container.subscriberRepository
             )
         }

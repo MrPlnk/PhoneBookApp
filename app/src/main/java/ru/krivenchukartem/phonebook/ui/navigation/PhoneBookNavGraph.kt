@@ -20,6 +20,8 @@ import ru.krivenchukartem.phonebook.ui.subscriber.SubscriberEditDestination
 import ru.krivenchukartem.phonebook.ui.subscriber.SubscriberEditScreen
 import ru.krivenchukartem.phonebook.ui.subscriber.SubscriberEntryNavigation
 import ru.krivenchukartem.phonebook.ui.subscriber.SubscriberEntryScreen
+import ru.krivenchukartem.phonebook.ui.subscriber.SubscriberSearchDestination
+import ru.krivenchukartem.phonebook.ui.subscriber.SubscriberSearchScreen
 
 @Composable
 fun PhoneBookNavHost(
@@ -37,6 +39,7 @@ fun PhoneBookNavHost(
                     navController.navigate("${SubscriberDetailDestination.route}/${it}")
                 },
                 navigateToSubscriberEntry = {navController.navigate(SubscriberEntryNavigation.route)},
+                navigateToSubscriberSearch = {navController.navigate(SubscriberSearchDestination.route)}
             )
         }
         composable(
@@ -66,6 +69,14 @@ fun PhoneBookNavHost(
             SubscriberEntryScreen(
                 navigationBack = {navController.popBackStack()},
                 navigationUp = {navController.navigateUp()}
+            )
+        }
+        composable(route = SubscriberSearchDestination.route){
+            SubscriberSearchScreen(
+                navigateBack = {navController.navigateUp()},
+                navigateToSubscriber = {
+                    navController.navigate("${SubscriberDetailDestination.route}/${it}")
+                }
             )
         }
     }

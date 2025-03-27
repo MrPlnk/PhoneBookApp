@@ -4,6 +4,7 @@
     <string name="subscriber_entry_title">Новый абонент</string>
     <string name="subscriber_detail_title">Об абоненте</string>
     <string name="subscriber_edit_title">Редактировать абонента</string>
+    <string name="subscriber_search_title">Поиск</string>
 
     <string name="back">Назад</string>
 
@@ -16,4 +17,6 @@
     <string name="subscriber_save">Сохранить абонента</string>
     <string name="subscriber_call">Позвонить абоненту</string>
     <string name="subscriber_delete">Удалить абонента</string>
+    <string name="subscriber_not_found">Абоненты не найдены</string>
+
 </resources>

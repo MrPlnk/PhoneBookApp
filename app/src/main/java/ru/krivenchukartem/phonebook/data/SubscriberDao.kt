@@ -24,4 +24,9 @@ interface SubscriberDao {
 
     @Query("SELECT * FROM subscribers ORDER BY fullName ASC")
     fun getAllSubscribers(): Flow<List<Subscriber>>
+
+    @Query("SELECT * FROM subscribers" +
+            " WHERE fullName LIKE '%' || :query || '%'" +
+            " ORDER BY fullName ASC")
+    fun getSubscribersByName(query: String): Flow<List<Subscriber>>
 }

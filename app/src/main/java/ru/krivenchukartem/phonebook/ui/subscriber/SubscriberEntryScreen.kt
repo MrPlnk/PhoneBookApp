@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -22,9 +23,14 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import kotlinx.coroutines.launch
 import ru.krivenchukartem.phonebook.PhoneBookTopAppBar
+import ru.krivenchukartem.phonebook.utils.MaskVisualTransformation
 import java.nio.file.WatchEvent
 
 object SubscriberEntryNavigation: NavigationDestination{
@@ -41,6 +47,7 @@ fun SubscriberEntryScreen(
     entryViewModel: SubscriberEntryViewModel = viewModel(factory = AppViewModelProvider .Factory)
 ) {
     val coroutineScope = rememberCoroutineScope()
+    val mask = MaskVisualTransformation("+7 (###) ### ##-##")
 
     Scaffold(
         topBar = { PhoneBookTopAppBar(
@@ -58,7 +65,8 @@ fun SubscriberEntryScreen(
                     navigationBack()
                 }
             },
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier.padding(innerPadding),
+            maskPhoneNumber = mask
         )
     }
 }
@@ -68,7 +76,8 @@ fun SubscriberEntryBody(
     subscriberUiState: SubscriberUiState,
     onSubscriberValueChanged: (SubscriberDetail) -> Unit,
     onSaveButtonClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    maskPhoneNumber: VisualTransformation? = null
 ){
     Column(
         modifier = modifier.padding(dimensionResource(R.dimen.medium_padding)),
@@ -77,7 +86,8 @@ fun SubscriberEntryBody(
         SubscriberEntryField(
             subscriberDetail = subscriberUiState.subscriberDetail,
             onValueChange = onSubscriberValueChanged,
-            modifier = Modifier
+            modifier = Modifier,
+            mask = maskPhoneNumber
         )
         Button(
             onClick = onSaveButtonClick,
@@ -97,6 +107,7 @@ fun SubscriberEntryField(
     modifier: Modifier = Modifier,
     onValueChange: (SubscriberDetail) -> Unit = {},
     enabled: Boolean = true,
+    mask: VisualTransformation? = null
 ){
     Column(
         modifier = modifier,
@@ -113,7 +124,10 @@ fun SubscriberEntryField(
             ),
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
-            singleLine = true
+            singleLine = true,
+            keyboardOptions = KeyboardOptions.Default.copy(
+                capitalization = KeyboardCapitalization.Words,
+                imeAction = ImeAction.Next)
         )
         OutlinedTextField(
             value = subscriberDetail.number,
@@ -126,7 +140,12 @@ fun SubscriberEntryField(
             ),
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
-            singleLine = true
+            singleLine = true,
+            visualTransformation = mask ?: VisualTransformation.None,
+            keyboardOptions = KeyboardOptions.Default.copy(
+                imeAction = ImeAction.Done,
+                keyboardType = KeyboardType.Number
+            )
         )
         if (enabled){
             Text(text = stringResource(R.string.required_field))

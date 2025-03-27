@@ -1,5 +1,6 @@
 package ru.krivenchukartem.phonebook.ui.home
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -46,6 +47,7 @@ object HomeDestination: NavigationDestination{
 fun HomeScreen(
     navigateToSubscriberEntry: () -> Unit,
     navigateToSubscriberDetail: (Int) -> Unit,
+    navigateToSubscriberSearch: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ){
@@ -58,7 +60,9 @@ fun HomeScreen(
             PhoneBookTopAppBar(
                 title = stringResource(HomeDestination.titleRes),
                 canNavigateBack = false,
-                scrollBehavior = scrollBehavior
+                scrollBehavior = scrollBehavior,
+                canSearch = true,
+                navigationToSearch = navigateToSubscriberSearch
             )
         },
         floatingActionButton = {
@@ -76,6 +80,7 @@ fun HomeScreen(
         HomeBody(
             subscribersList = homeUiState.subscribersList,
             onItemClick = navigateToSubscriberDetail,
+            noneResult = R.string.subscribers_list_is_empty,
             modifier = Modifier.padding(innerPadding)
         )
     }
@@ -85,6 +90,7 @@ fun HomeScreen(
 fun HomeBody(
     subscribersList: List<Subscriber>,
     onItemClick: (Int) -> Unit,
+    @StringRes noneResult: Int,
     modifier: Modifier = Modifier,
 ){
     Column(
@@ -93,7 +99,7 @@ fun HomeBody(
     ){
         if (subscribersList.isEmpty()){
             Text(
-                text = stringResource(R.string.subscribers_list_is_empty),
+                text = stringResource(noneResult),
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center
             )
@@ -165,7 +171,8 @@ fun HomeBodyPreview(){
     )
     HomeBody(
         subscribersList = listOf(),
-        onItemClick = {}
+        onItemClick = {},
+        R.string.subscribers_list_is_empty
     )
 }
 

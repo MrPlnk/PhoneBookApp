@@ -14,6 +14,7 @@ import ru.krivenchukartem.phonebook.PhoneBookTopAppBar
 import ru.krivenchukartem.phonebook.R
 import ru.krivenchukartem.phonebook.ui.AppViewModelProvider
 import ru.krivenchukartem.phonebook.ui.navigation.NavigationDestination
+import ru.krivenchukartem.phonebook.utils.MaskVisualTransformation
 
 object SubscriberEditDestination: NavigationDestination{
     override val route = "subscriber_edit"
@@ -30,6 +31,8 @@ fun SubscriberEditScreen(
     viewModel: SubscriberEditViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
     val coroutineScope = rememberCoroutineScope()
+    val mask = MaskVisualTransformation("+7 (###) ### ##-##")
+
     Scaffold(
         modifier = modifier,
         topBar = {
@@ -48,7 +51,8 @@ fun SubscriberEditScreen(
                 }
             },
             onSubscriberValueChanged = viewModel::updateUiState,
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier.padding(innerPadding),
+            maskPhoneNumber = mask
         )
     }
 }
