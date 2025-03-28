@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -49,6 +50,7 @@ fun SubscriberDetailScreen(
 ) {
     val uiState = viewModel.uiState.collectAsState()
     val coroutineScope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     Scaffold(
         modifier = modifier,
@@ -71,7 +73,7 @@ fun SubscriberDetailScreen(
         }
     ){ innerPadding ->
         SubscriberDetailBody(
-            onCallButtonClicked = {},
+            onCallButtonClicked = {viewModel.dialSubscriber(context)},
             onDeleteButtonClicked = {
                 coroutineScope.launch {
                     viewModel.deleteSubscriber()

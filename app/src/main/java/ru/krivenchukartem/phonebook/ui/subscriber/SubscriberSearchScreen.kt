@@ -62,7 +62,7 @@ fun SubscriberSearchBody(
     modifier: Modifier = Modifier
 ){
     Column(
-        modifier = modifier.fillMaxWidth().padding(dimensionResource(R.dimen.medium_padding)),
+        modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.small_padding))
     ) {
         TextField(
@@ -71,7 +71,10 @@ fun SubscriberSearchBody(
             singleLine = true,
             keyboardOptions = KeyboardOptions.Default.copy(
                 imeAction = ImeAction.Done
-            )
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(dimensionResource(R.dimen.medium_padding))
         )
         HomeBody(
             subscribersList = subscribersList.subscribersList,

@@ -33,7 +33,7 @@ object AppViewModelProvider {
         initializer {
             SubscriberDetailViewModel(
                 this.createSavedStateHandle(),
-                phoneBookApplication().container.subscriberRepository
+                phoneBookApplication().container.subscriberRepository,
             )
         }
 
