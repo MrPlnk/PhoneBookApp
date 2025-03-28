@@ -18,6 +18,7 @@ abstract class PhoneBookDatabase: RoomDatabase() {
             return Instance ?: synchronized(this){
                 Room.databaseBuilder(context, PhoneBookDatabase::class.java, "subscriber_database")
                     .fallbackToDestructiveMigration()
+                    .createFromAsset("phoneBook.db")
                     .build()
                     .also{ Instance = it}
             }

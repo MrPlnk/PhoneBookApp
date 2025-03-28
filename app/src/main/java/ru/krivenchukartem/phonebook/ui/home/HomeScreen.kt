@@ -29,6 +29,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.krivenchukartem.phonebook.PhoneBookTopAppBar
@@ -143,7 +144,9 @@ fun SubscriberItem(
     ) {
         Text(
             text = item.fullName,
-            modifier = Modifier.fillMaxWidth().padding(dimensionResource(R.dimen.small_padding))
+            modifier = Modifier.fillMaxWidth().padding(dimensionResource(R.dimen.small_padding)),
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
         )
     }
 
