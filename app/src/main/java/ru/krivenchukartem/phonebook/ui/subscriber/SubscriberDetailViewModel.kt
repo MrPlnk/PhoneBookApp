@@ -19,6 +19,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 
 class SubscriberDetailViewModel(
     savedStateHandle: SavedStateHandle,
@@ -47,7 +48,7 @@ class SubscriberDetailViewModel(
 
     fun dialSubscriber(context: Context) {
         val dialIntent = Intent(Intent.ACTION_DIAL).apply {
-            data = Uri.parse("tel:${uiState.value.subscriberDetail.number}")
+            data = "tel:+7${uiState.value.subscriberDetail.number}".toUri()
         }
         context.startActivity(dialIntent)
     }
