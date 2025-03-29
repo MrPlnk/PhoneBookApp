@@ -12,6 +12,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import ru.krivenchukartem.phonebook.R
+import ru.krivenchukartem.phonebook.ui.help.HelpDestination
+import ru.krivenchukartem.phonebook.ui.help.HelpScreen
 import ru.krivenchukartem.phonebook.ui.home.HomeDestination
 import ru.krivenchukartem.phonebook.ui.home.HomeScreen
 import ru.krivenchukartem.phonebook.ui.subscriber.SubscriberDetailDestination
@@ -39,7 +41,8 @@ fun PhoneBookNavHost(
                     navController.navigate("${SubscriberDetailDestination.route}/${it}")
                 },
                 navigateToSubscriberEntry = {navController.navigate(SubscriberEntryNavigation.route)},
-                navigateToSubscriberSearch = {navController.navigate(SubscriberSearchDestination.route)}
+                navigateToSubscriberSearch = {navController.navigate(SubscriberSearchDestination.route)},
+                navigateToHelp = {navController.navigate(HelpDestination.route)}
             )
         }
         composable(
@@ -77,6 +80,11 @@ fun PhoneBookNavHost(
                 navigateToSubscriber = {
                     navController.navigate("${SubscriberDetailDestination.route}/${it}")
                 }
+            )
+        }
+        composable(route = HelpDestination.route){
+            HelpScreen(
+                navigationBack = {navController.navigateUp()}
             )
         }
     }

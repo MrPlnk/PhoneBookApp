@@ -3,6 +3,7 @@ package ru.krivenchukartem.phonebook
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.Icons.Filled
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -32,7 +33,9 @@ fun PhoneBookTopAppBar(
     scrollBehavior: TopAppBarScrollBehavior? = null,
     navigationUp: () -> Unit = {},
     canSearch: Boolean = false,
-    navigationToSearch: () -> Unit = {}
+    navigationToSearch: () -> Unit = {},
+    canHelp: Boolean = false,
+    navigationToHelp:() -> Unit = {},
 ) {
     CenterAlignedTopAppBar(
         modifier = modifier,
@@ -49,6 +52,15 @@ fun PhoneBookTopAppBar(
             }
         },
         actions = {
+            if (canHelp){
+                IconButton(onClick = navigationToHelp) {
+                    Icon(
+                        imageVector = Filled.Menu,
+                        contentDescription = stringResource(R.string.help_screen_title)
+
+                    )
+                }
+            }
             if (canSearch) {
                 IconButton(onClick = navigationToSearch) {
                     Icon(

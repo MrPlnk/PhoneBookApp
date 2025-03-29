@@ -49,6 +49,7 @@ fun HomeScreen(
     navigateToSubscriberEntry: () -> Unit,
     navigateToSubscriberDetail: (Int) -> Unit,
     navigateToSubscriberSearch: () -> Unit,
+    navigateToHelp: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ){
@@ -63,7 +64,9 @@ fun HomeScreen(
                 canNavigateBack = false,
                 scrollBehavior = scrollBehavior,
                 canSearch = true,
-                navigationToSearch = navigateToSubscriberSearch
+                navigationToSearch = navigateToSubscriberSearch,
+                canHelp = true,
+                navigationToHelp = navigateToHelp
             )
         },
         floatingActionButton = {
